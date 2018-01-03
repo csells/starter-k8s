@@ -1,0 +1,26 @@
+<html>
+
+<head>
+  <title>Digits of Pi</title>
+</head>
+
+<body>
+  <form onsubmit="return form_submit()">
+    Digits:
+    <input id="digits" />
+    <button type="submit">Pi!</button>
+  </form>
+  <div id="pi"></div>
+</body>
+<script>
+  function form_submit(e) {
+    let digits = parseInt(document.getElementById("digits").value);
+    fetch(`http://localhost:8080/pi/${digits}`)
+    .then(res => res.json())
+    .then(json => document.getElementById("pi").textContent = json.pi)
+    .catch(ex => alert(`err: ${ex.description}`));
+    return false;
+  }
+</script>
+
+</html>
